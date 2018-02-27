@@ -55,7 +55,7 @@
 \end{prompt*}}
 \newcommand{\vy}{\vec{y}}
 \DeclareMathOperator{\sech}{sech}
-\DeclareMathOperator{\Spec}{Spec}
+\DeclareMathOperator{\Spec}{\mathbf{Spec}}
 \DeclareMathOperator{\spec}{Spec}
 \DeclareMathOperator{\spm}{Spm}
 \DeclareMathOperator{\rad}{rad}
@@ -67,6 +67,7 @@
 	#1
 	\end{align}}
 \renewcommand{\AA}{\mathbb{A}}
+\newcommand{\Aa}{\mathscr{A}}
 \newcommand{\LL}{\mathcal{L}}
 \newcommand{\CC}{\mathbb{C}}
 \newcommand{\DD}{\mathbb{D}}
@@ -283,84 +284,33 @@
 \addbibresource{algeo.bib}
 \begin{document}\maketitle
 
-\prob{1}
-\begin{prompt*}
-	We let $X=\spec \ZZ[x,y]/(y^2-2x)$, that is the curve in $\AA_\ZZ^1$ given by the equation $x=y^2/2$. Describe the fiber $X_p$ over each point $p\in \spec \ZZ$ as the spectrum of an algebra and enumerate the points $p$ over which $X_p\cong\AA^1_k$ for some field $k$. 
-\end{prompt*}
-\begin{proof}[Response]
-We recall that the points of $\spec \ZZ$ are given by prime integers including the \say{prime at zero.\footnote{wait is that the prime at infinity?}} Then, the fiber of the map $X\to \spec \ZZ$ over $p\in \spec \ZZ$ is $X_p:=x_{(k(p))}:=X\times_{\spec \ZZ} \spec k(p)$. As $X$ is affine with ring of global sections $A=\ZZ[x,y]/(y^2-2x)$, $X_p\cong \spec \left(A\otimes_{\ZZ}k(p)\right)=\spec k(p)[x,y]/(y^2-2x)$. If $p=\idl{0}$, the generic point, then $k(p)=\ZZ_\idl{0}/\idl{0}\ZZ_{\idl{0}}=\QQ$, and for $p>0$, $k(p)=\ZZ_{\idl{p}}/\idl{p}\ZZ_{\idl{p}}=\left(\ZZ/p\right)_{\idl{p}}=\FF_p$. We note that in the case that $k(p)$ is not characteristic 2 (i.e. when $p\neq 2$), there is an isomorphism $k(p)[x,y]/\idl{y^2-2x}\to k(p)[t]$ by $y\mapsto t$, $x\mapsto \frac{t^2}{2}$ and hence $X_p\cong \AA^1_{k(p)}$. On the other hand, when $p=2$, $2x=0$ in $\FF_2$, so $A\otimes_\ZZ \FF_2=\FF_2[x,y]/\idl{y^2}$, which contains the nilpotent element $y$ and hence is not isomorphic to a polynomial ring over any field.
-\end{proof}
-
-\prob{2}
-\begin{prop*}
-For $X$ an $S$-scheme of finite type and $U\subset X$ an open subscheme, $U$ is an $S$-scheme of finite type.
+\prob{2} We let $q=p^n$ where $n\geq 1$ and $p$ is a prime integer.
+We first state a lemma from field theory without proof.
+\begin{lemma}
+	The multiplicative group $\FF_{q}^\times$ has order $q$
+\end{lemma}
+And now onto the problem.
+\begin{prop*} 
+	There is a bijection between $\FF_q$-points of a $\FF_q$-scheme $X$ and the underlying set of points $x\in X$ such that $\id(x)\equiv F^n(x)$ where $F$ is the $p$-Frobenius morphism. This bijection is achieved by the map associating $\FF_q$ point (i.e. a morphism $\phi:\spec \FF_q\to X$ over $\FF_q$) with the lone element of its image.
 \end{prop*}
-For clarity's sake over the next two problems, we will give explicitly our definitions of finite type, taken from a survey of \cite[pp.84]{hsh}, \cite[pp.159]{FOAG} and in-class notes.
-\begin{defn}~\label{defn:ft}
-\begin{enumerate}[label=\textit{(\roman*)}]
-
-	\item For $A$ a ring, $X$ is of finite type over $A$ if there is a \textit{finite} open cover $\{U_i\}$ of $X$ such that each $\OO_X(U_i)$ is an $A$-algebra of finite type in the ring-theoretic sense.
-	\item $X$ is an $S$-scheme of finite type if for $\pi:X\to S$ there exists an open affine cover $\{V_i\}$ such that $\pi^{-1}(V_i)$ is of finite type over $V_i$. Equivalently, $X$ is of finite type if for any open affine $U\subset S$, $\pi^{-1}(U)$ is of finite type over $U$.
-\end{enumerate}
-\end{defn}
-\begin{proof}[Proof of main proposition]
-	We have that for any open affine $V\subset S$, $\pi^{-1}(V)$ is of finite type over $V$. We let $\{V_i\}$ be an open affine cover of $\pi(U)$ aaaaaaaaaaaaaaaaaaaand I just figured out that the proof I had written for this does not work oops!
+\begin{proof}
+	We first note that by the radical property of prime ideals, the Frobenius morphism is necessarily the identity map on the underlying topological space of $X$. We first handle the case that $X=\spec A$ for an $\FF_q$-algebra $A$. We let $P=\{x\in X\;:\;(\exists\;\phi:\FF_q\to X\text{ with } \im\phi=\{x\})\}$ and $Q=\{x\in X\;:\; F^n(x)\equiv \id(x)\}$.\todo{finish} 
 \end{proof}
-
-
 \prob{3}
+We break the problem into two statements.
 \begin{prop*}
-	If $X$ is an $S$-scheme of finite type by $\pi:X\to S$ and $S$ is a Noetherian scheme, then $X$ is Noetherian.
+	We let $Y$ be a scheme, $\Aa$ a quasi-coherent $\OO_Y$-algebra, $X:=\Spec \Aa$ and $f:\Spec \Aa\to Y$ its associated canonical morphism. Then, $f$ is affine and $\Aa=f_*\OO_X$.
 \end{prop*}
 \begin{proof}
-	As $S$ is Noetherian, there exists an affine open cover $\{U_i\}$ of $S$ where each $U_i\cong \spec A_i$ for a Noetherian ring $A_i$. As $S$ is necessarily quasi-compact, we may assume $\{U_i\}_{i=1}^m$ is a finite set without loss of generality. By Definition \ref{defn:ft}, $\pi^{-1}(U_i)$ is of finite type over $U_i$, that is there exists a finite open affine cover $\{V_{ji}\}_{j=1}^{n_i}$ of $\pi^{-1}(U_i)$ where $V_{ji}\cong\spec B_{ji}$ and $B_{ij}$ is a finite $A_i$-algebra. By the Hilbert Basis Theorem, $B_{ij}$ is then Noetherian, and hence the affine scheme $V_{ji}$ is Noetherian. Thus, $X$ has a finite open cover $\{V_{ji}\}_{i,j=1}^{i=m,j=n_i}$ by Noetherian affine subschemes, and is therefore itself Noetherian.	
+	We note that by the definition given by exercise II.5.17(c), for any affine open $V\subseteq Y$, $f^{-1}(V)\cong \spec \Aa(V)$. As $\Aa(V)$ is a ring (as opposed to a module over a sheaf), $f^{-1}(V)$ is indeed affine. Moreover, we have that $f_*\OO_X(V)=\OO_X(f^{-1}(V))=\Aa(V)$, so indeed $f_*\OO_X$ is the sheaf $\Aa$. 
 \end{proof}
-%\prob{4}
-
-%\prob{5}
-
+\begin{prop*}
+	We let $f:X\to Y$ be an affine morphism. Then, $\Aa:=f_*\OO_X$ is a quasi-coherent sheaf of $\OO_Y$-algebras and $X\cong \Spec \Aa$. 
+\end{prop*}\begin{proof}
+We first show that $\Aa$ is indeed quasi-coherent (that it is a sheaf of $\OO_Y$-algebras is immediate, as it is for any morphism of schemes). We note that as $f$ is affine, $f^{-1}(V)$ is affine as well. As $\OO_X(f^{-1}(V)$ is necessarily a $\OO_Y(V)$-algebra via the map $f^\#(V)$ and $f^{-1}(V)\cong \spec \OO_X(f^{-1}(V))$, we have that $f_*\OO_X=\OO_X(f^{-1}(V))$ is indeed quasi-coherent. We now wish to show that $X=\Spec \Aa$. This however is immediate from definitions as well, as indeed the restriction morphism $f^{-1}(U)\hookrightarrow f^{-1}(V)$ corresponds to the ring morphism $\Aa(V)\to \Aa(U)$ by affine-ness of $f^{-1}(V)\cong \spec \Aa(V)$. We have now completed what can be described only extremely charitably as a proof.
+\end{proof}
+\prob{4}
+\prob{5}
 \prob{6}
-\prt{1}
-\begin{prop*}
-We let $R$ be a ring of dimension 0. Then, $R=Q(R)$. 
-\end{prop*}
-\begin{proof}
-	We let $x\in R$ be a non-unit. Then, there is some $\pfr\ni x$ with $\pfr$ necessarily minimal. Thus, $\frac{x}{1}\in \pfr R_\pfr\triangleleft R_\pfr$. As $\pfr R_\pfr$ is the only prime ideal of $R_\pfr$, we have that $\frac{x}{1}$ is nilpotent in $R_\pfr$. We let $k\geq 1$ be such that $(\frac{x}{1})^{k-1}\neq 0$ but $(\frac{x}{1})^k=0$. Then, there is some $u$ in $R\setminus \pfr$ such that $u(x^k-0)=0$ in $R$, i.e. $ux^k=0$. Thus, $x$ is a zero-divisor.
-\end{proof}
-\prt{2}
-\begin{lemma}
-	We let $R$ be a reduced ring, $Z$ the set of zero-divisors in $R$, and $\{\pfr_i\}_{i\in \Ical}$ the (possibly infinite) set of minimal prime ideals of $R$. Then, $Z\subset \bigcup_{i\in \Ical}\pfr_i$. \label{6blem}
-\end{lemma}
-\begin{subproof}[Proof of Lemma \ref{6blem}]
-We let $x\in Z$. Then, there is some $y\in R$ such that $xy=0$. As $\bigcap_{i\in \Ical}\pfr_i=0$ in a reduced ring, we have that there is some $\pfr_i\centernot\ni y$. However, we have that $xy=0\in \pfr_i$. Thus, $x\in \pfr_i$. 
-\end{subproof}
-\begin{cor}[Main proposition for problem 6b]
-	If $R$ is reduced, has only finitely many minimal prime ideals, and has $R=Q(R)$, then $\dim R\leq 0$. \label{6bcor}
-\end{cor}
-\begin{proof}[Proof of Corollary \ref{6bcor}]
-	We let the minimal prime ideals of $R$ be the set $\{\pfr_1,\ldots,\pfr_n\}$, and let $I\triangleleft R$ be any proper ideal. Then, $I$ consists of zero-divisors as else it contains a unit, so $I\subset \bigcup_{i=1}^n\pfr_i$. By the theorem of prime avoidance (see for instance \cite[\S3.2]{eis}), we now have that $I\subset \pfr_i$ for some $1\leq i \leq n$. Thus, in $R$, any proper ideal is contained in some minimal prime, so the minimal primes are indeed maximal and thus $\dim R\leq 0$. 
-\end{proof}
-\prob{7}
-\begin{prop*}
-For $X$ a scheme, $x\in X$, $\codim \cl{\{x\}}=\dim \OO_{X,x}$.
-\end{prop*}
-We begin with a lemma
-\begin{lemma}
-	We let $X$ be a topological space and $\{U_i\}_{i\in \Ical}$ an open cover of $X$. Then, $\dim X=\sup_{i\in \Ical}\dim U_i$. Similarly, for any set $S\subset U_i$ for some $U_i$, we have that $\codim_XS=\codim_{U_i} S$ \label{7lemc}
-\end{lemma}
-\begin{subproof}[Proof of Lemma \ref{7lemc}]
-	We note that, trivially, $\dim X\geq \sup_{i\in \Ical}\dim U_i$. We show that $\dim X\leq \sup_{i\in \Ical}\dim U_i$. We let $Z_0\subsetneq\ldots\subsetneq Z_r$ be any chain of closed irreducible subsets in $X$. Then, there is some $U_0$ such that $U_0\cap Z_0\neq \emptyset$. We claim that $U_0\cap Z_{i-1}\neq U_0\cap Z_i$ for any $1<i\leq r$. Indeed, suppose for the sake of contradiction $U_0\cap Z_{i-1}=U_0\cap Z_i$ for some $i$. Then, $Z_{i}\cap U_0^c$ is closed, proper, and nonempty as $\emptyset \neq Z_i\setminus Z_{i-1}\subset Z_i\cap U_0^c$. Furthermore, $Z_i\cap Z_{i-1}$ is closed and nonempty and proper as $Z_i\neq Z_{i-1}$. Then, $Z_i=\left(Z_i\cap U_0^c\right)\cup (Z_i\cap Z_{i-1})$, contradicting irreducibility of $Z_i$. Thus, for any $r\in \NN$ such that there exists a chain of length $r$ of closed irreducible subsets in $X$, there is some $U_i$ such that a chain of equal lenght exists in $U_i$, so indeed $\dim X\leq \sup_{i\in \Ical}\dim U_i$.
-	
-	The proof of the second statement of the lemma is exactly identical, noting that $U_i$ will play the role of $U_0$ in the above paragraph.
-\end{subproof}
-\begin{proof}[Proof of main proposition]
-	We let $\{U_i\}_{i\in \Ical}$ be any affine open cover of $X$ with $\spec A\cong U_0\ni x$. Then, by the lemma, it suffices to show the proposition relative to the affine scheme $U_0$. Hence, without loss of generality, we let $X\cong \spec A$ be affine. Then, the codimension of $\cl{\{x\}}$ is the supremum of the lengths chains of primes in $A$ contained in $\pfr$, as those correspond to irreducible closed subsets containing $\cl{\{x\}}$ by the inclusion-reversing correspondence of the Nullstellensatz. Then, $\OO_{X,x}\cong A_\pfr$ where $x$ corresponds to the prime $\pfr\triangleleft A$. By a basic theorem of localization, there is an inclusion-preserving bijection between primes of $A_\pfr$ and those contained in $\pfr$ of $A$, and hence $\dim \OO_{X,x}$ is as well the supremum of the lengths chains of primes in $A$ contained in $\pfr$, thus completing our proof.
-\end{proof}
-\begin{cor*}
-The dimension of a scheme is the supremum of the Krull dimension of its stalks
-\end{cor*}
-\begin{proof}
-	We note that all chains of irreducible closed subspaces in $X$ must have a minimal element $Z_0$. Thus, the dimension of $X$ is the supremum of the codimensions of all irreducible closed subspaces. As those correspond to $V(\pfr)$ for some $\pfr\triangleleft \OO_{U}(U)$ for some affine open $U$, they are necessarily the closure of the point $\{x\}$ where $x$ corresponds to $\pfr$ in the isomorphism $U\cong \spec \OO_U(U)$.
-\end{proof}
-\printbibliography
+
 \end{document}
